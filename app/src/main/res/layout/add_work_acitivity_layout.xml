@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/todoTitle_editText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:hint="@string/title_hintText"
+        android:padding="16dp" />
+
+    <RadioGroup
+        android:id="@+id/category_radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/todoTitle_editText"
+        android:layout_alignRight="@id/todoTitle_editText"
+        android:layout_below="@+id/todoTitle_editText"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <RadioButton
+            android:id="@+id/todo_radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="@string/todo_label_radiobutton"
+            android:textColor="#FF2B2525" />
+
+        <RadioButton
+            android:id="@+id/social_radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="@string/social_buttonTitle"
+            android:textColor="#FF2B2525" />
+
+
+        <RadioButton
+            android:id="@+id/school_radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/school_buttonTitle"
+            android:textColor="#2b2525" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/dateSpinner_textView"
+        style="@android:style/Widget.DeviceDefault.Spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/category_radioGroup"
+        android:padding="16dp"
+        android:text="12 January 2015" />
+
+
+    <TextView
+        android:id="@+id/timeSpinner_textView"
+        style="@android:style/Widget.DeviceDefault.Spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/category_radioGroup"
+        android:layout_below="@id/category_radioGroup"
+        android:layout_toEndOf="@id/dateSpinner_textView"
+        android:layout_toRightOf="@id/dateSpinner_textView"
+        android:gravity="right"
+        android:padding="16dp"
+        android:text="17:32 PM" />
+
+</RelativeLayout>

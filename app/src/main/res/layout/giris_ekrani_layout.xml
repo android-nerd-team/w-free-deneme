@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/girisEkrani_relativeLayout">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_title"
+        android:id="@+id/textView"
+        android:textSize="40sp"
+        android:typeface="monospace"
+        android:textColor="#40a1f6"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seys_switch"
+        android:checked="false"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/erkek_text"
+        android:id="@+id/erkekLabel_textView"
+        android:layout_alignTop="@+id/seys_switch"
+        android:layout_toLeftOf="@+id/seys_switch"
+        android:textSize="20sp"
+        android:layout_alignBottom="@+id/seys_switch"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/disi_text"
+        android:id="@+id/disi_textView"
+        android:textSize="20sp"
+        android:layout_alignTop="@+id/seys_switch"
+        android:layout_toRightOf="@+id/seys_switch"
+        android:layout_toEndOf="@+id/seys_switch" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberPassword"
+        android:ems="10"
+        android:id="@+id/password_editText"
+        android:layout_below="@+id/seys_switch"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/password_hint" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:background="#40a1f6"
+        android:text="@string/login_buttonTitle"
+        android:id="@+id/login_button"
+        android:layout_below="@+id/password_editText"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
