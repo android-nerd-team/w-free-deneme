@@ -9,11 +9,9 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by recepinanc on 12/10/15.
@@ -54,9 +52,8 @@ public class AlertDialogFragment extends DialogFragment {
 
         DatePicker dpicker = (DatePicker) v.findViewById(R.id.datePicker);
         dpicker.setCalendarViewShown(true);
-        dpicker.init(year,month,day,null);
+        dpicker.init(year, month, day, null);
 
-        DatePicker datePicker = new
         builder.setView(v)
                 .setPositiveButton("DONE", new DialogInterface.OnClickListener() {
                     @Override
@@ -68,6 +65,6 @@ public class AlertDialogFragment extends DialogFragment {
     }
 
     public interface AlertDialogListener{
-        public void noticePositiveClicked(AlertDialogFragment alertDialogFragment);
+        void noticePositiveClicked(AlertDialogFragment alertDialogFragment);
     }
 }

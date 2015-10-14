@@ -32,4 +32,5 @@
     <string name="save_action">SAVE</string>
     <string name="cancel_action">CANCEL</string>
     <string name="pick_date">Pick Date</string>
+    <string name="wrong_pass">Yanlış şifre.Lütfen tekrar deneyiniz.</string>
 </resources>

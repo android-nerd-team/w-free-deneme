@@ -14,13 +14,16 @@
         android:textColor="#40a1f6"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="75dp" />
+        android:layout_marginTop="120dp" />
 
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/seys_switch"
         android:checked="false"
+        android:switchMinWidth="30dp"
+        android:textOff=""
+        android:textOn=""
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
@@ -63,4 +66,17 @@
         android:id="@+id/login_button"
         android:layout_below="@+id/password_editText"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wrong_pass"
+        android:id="@+id/wrongPass_textView"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:layout_below="@+id/login_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:textColor="#e15258" />
+
 </RelativeLayout>
