@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -44,6 +43,17 @@ public class WorkAdapter extends BaseAdapter {
             LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.work_item_layout,parent,false);
 
+            TextView title = (TextView) convertView.findViewById(R.id.title_textView);
+            TextView category = (TextView) convertView.findViewById(R.id.category_textView);
+            TextView date = (TextView) convertView.findViewById(R.id.date_textView);
+            TextView time = (TextView) convertView.findViewById(R.id.time_textView);
+
+            Work work = works.get(position);
+
+            title.setText(work.getmTitle());
+            category.setText(work.getmCategory());
+
+            return convertView;
         } else {
         }
         return null;

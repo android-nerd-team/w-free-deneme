@@ -18,6 +18,11 @@ import android.widget.TextView;
 
 import java.util.Random;
 
+import static com.example.recepinanc.whenfreedeneme.R.drawable;
+import static com.example.recepinanc.whenfreedeneme.R.id;
+import static com.example.recepinanc.whenfreedeneme.R.layout;
+import static com.example.recepinanc.whenfreedeneme.R.string;
+
 /**
  * Created by recepinanc on 08/10/15.
  */
@@ -35,44 +40,74 @@ public class LoginActivity extends Activity {
     private EditText passwordEdit;
     private TextView wrongPassTextView;
 
-    private Drawable[] backgrounds = new Drawable[2];
+    private Drawable background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.giris_ekrani_layout);
-
-        //todo Add new drawables lens blured pictures of us.
-        backgrounds[0] = ContextCompat.getDrawable(getApplicationContext(), R.drawable.splashscreen);
-        backgrounds[1] = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_launcher);
+        setContentView(layout.giris_ekrani_layout);
 
         Random random = new Random();
-        int randomNumber = random.nextInt(2);
+        int randomNumber = random.nextInt(10);
 
-        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.girisEkrani_relativeLayout);
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(id.girisEkrani_relativeLayout);
+
+        switch (randomNumber) {
+            case 0:
+                background = changeBg(drawable.bg_1);
+                break;
+            case 1:
+                background = changeBg(drawable.bg_2);
+                break;
+            case 2:
+                background = changeBg(drawable.bg_3);
+                break;
+            case 3:
+                background = changeBg(drawable.bg_4);
+                break;
+            case 4:
+                background = changeBg(drawable.bg_5);
+                break;
+            case 5:
+                background = changeBg(drawable.bg_6);
+                break;
+            case 6:
+                background = changeBg(drawable.bg_7);
+                break;
+            case 7:
+                background = changeBg(drawable.bg_8);
+                break;
+            case 8:
+                background = changeBg(drawable.bg_9);
+                break;
+            case 9:
+                background = changeBg(drawable.bg_10);
+                break;
+            default:
+                background = changeBg(drawable.splashscreen);
+                break;
+        }
 
         Log.i("number ", "" + randomNumber);
         Resources resources = getResources();
         final int sdk = android.os.Build.VERSION.SDK_INT;
         if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            relativeLayout.setBackgroundDrawable(backgrounds[randomNumber]);
+            relativeLayout.setBackgroundDrawable(background);
         } else {
-            relativeLayout.setBackground(backgrounds[randomNumber]);
+            relativeLayout.setBackground(background);
         }
 
-        seysSwitch = (Switch) findViewById(R.id.seys_switch);
-        loginButton = (Button) findViewById(R.id.login_button);
-        passwordEdit = (EditText) findViewById(R.id.password_editText);
-        wrongPassTextView = (TextView) findViewById(R.id.wrongPass_textView);
+        seysSwitch = (Switch) findViewById(id.seys_switch);
+        loginButton = (Button) findViewById(id.login_button);
+        passwordEdit = (EditText) findViewById(id.password_editText);
+        wrongPassTextView = (TextView) findViewById(id.wrongPass_textView);
         wrongPassTextView.setText("");
 
         if (savedInstanceState != null) {
             wrongPassText = savedInstanceState.getString(SAVE_WRONG);
             wrongPassTextView.setText(wrongPassText);
         } else {
-
-            wrongPassText = resources.getString(R.string.wrong_pass);
-
+            wrongPassText = resources.getString(string.wrong_pass);
         }
 
 
@@ -126,5 +161,10 @@ public class LoginActivity extends Activity {
 
         outState.putString(SAVE_WRONG, wrongPassText);
 
+    }
+
+    public Drawable changeBg(int drawableID) {
+        Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), drawableID);
+        return drawable;
     }
 }

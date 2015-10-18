@@ -1,82 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:id="@+id/girisEkrani_relativeLayout">
+    android:id="@+id/girisEkrani_relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/main_title"
-        android:id="@+id/textView"
-        android:textSize="40sp"
-        android:typeface="monospace"
-        android:textColor="#40a1f6"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp" />
+        android:layout_marginTop="120dp"
+        android:text="@string/main_title"
+        android:textColor="#ffffffff"
+        android:textSize="40sp"
+        android:typeface="monospace" />
 
     <Switch
+        android:id="@+id/seys_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/seys_switch"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:checked="false"
         android:switchMinWidth="30dp"
         android:textOff=""
-        android:textOn=""
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:textOn="" />
 
     <TextView
+        android:id="@+id/erkekLabel_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/erkek_text"
-        android:id="@+id/erkekLabel_textView"
+        android:layout_alignBottom="@+id/seys_switch"
         android:layout_alignTop="@+id/seys_switch"
         android:layout_toLeftOf="@+id/seys_switch"
-        android:textSize="20sp"
-        android:layout_alignBottom="@+id/seys_switch"/>
+        android:text="@string/erkek_text"
+        android:textColor="#ffffffff"
+        android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/disi_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/disi_text"
-        android:id="@+id/disi_textView"
-        android:textSize="20sp"
         android:layout_alignTop="@+id/seys_switch"
+        android:layout_toEndOf="@+id/seys_switch"
         android:layout_toRightOf="@+id/seys_switch"
-        android:layout_toEndOf="@+id/seys_switch" />
+        android:text="@string/disi_text"
+        android:textColor="#ffffffff"
+        android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/password_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberPassword"
-        android:ems="10"
-        android:id="@+id/password_editText"
         android:layout_below="@+id/seys_switch"
         android:layout_centerHorizontal="true"
-        android:hint="@string/password_hint" />
+        android:ems="10"
+        android:hint="@string/password_hint"
+        android:inputType="numberPassword"
+        android:textColorHint="#ffffff" />
 
     <Button
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
+        android:layout_below="@+id/password_editText"
+        android:layout_centerHorizontal="true"
         android:background="#40a1f6"
         android:text="@string/login_buttonTitle"
-        android:id="@+id/login_button"
-        android:layout_below="@+id/password_editText"
-        android:layout_centerHorizontal="true" />
+        android:textColor="#ffffff" />
 
     <TextView
+        android:id="@+id/wrongPass_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/wrong_pass"
-        android:id="@+id/wrongPass_textView"
-        android:textSize="15sp"
-        android:gravity="center"
         android:layout_below="@+id/login_button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:textColor="#e15258" />
+        android:gravity="center"
+        android:text="@string/wrong_pass"
+        android:textColor="#d72634"
+        android:textSize="15sp" />
 
 </RelativeLayout>

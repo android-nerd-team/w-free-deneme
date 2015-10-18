@@ -1,25 +1,17 @@
 package com.example.recepinanc.whenfreedeneme;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by recepinanc on 10/10/15.
@@ -51,17 +43,20 @@ public class WorksActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        isAdded = getIntent().getBooleanExtra(AddWorkActivity.EXTRA_IS_ADDED,false);
+        isAdded = getIntent().getBooleanExtra(AddWorkActivity.EXTRA_IS_ADDED, false);
 
         if (isAdded) {
-            Work work = new Work(
-                    getIntent().getStringExtra(AddWorkActivity.EXTRA_TITLE),
-                    getIntent().getStringExtra(AddWorkActivity.EXTRA_CATEGORY),
-                    getIntent().getStringExtra(AddWorkActivity.EXTRA_DATE),
-                    getIntent().getStringExtra(AddWorkActivity.EXTRA_TIME));
+            Work work = new Work
+                    (getIntent().getStringExtra(AddWorkActivity.EXTRA_TITLE),
+                            getIntent().getStringExtra(AddWorkActivity.EXTRA_CATEGORY),
+                            getIntent().getStringExtra(AddWorkActivity.EXTRA_YEAR),
+                            getIntent().getStringExtra(AddWorkActivity.EXTRA_MONTH),
+                            getIntent().getStringExtra(AddWorkActivity.EXTRA_DAY),
+                            getIntent().getStringExtra(AddWorkActivity.EXTRA_HOUR),
+                            getIntent().getStringExtra(AddWorkActivity.EXTRA_MINUTE));
 
             //works.add(work);
-            updateArray(works,work);
+            updateArray(works, work);
             Toast.makeText(WorksActivity.this, "NEWBIE ADDED.", Toast.LENGTH_SHORT).show();
         }
     }
@@ -71,23 +66,13 @@ public class WorksActivity extends AppCompatActivity {
         //Add a new item add its date and update the array
         works.add(work);
         Toast.makeText(WorksActivity.this, "A new work is created! " +
-                "\n" + work.getmName() +
+                "\n" + work.getmTitle() +
                 "\n" + work.getmCategory() +
-                "\n" + work.getmDate() +
-                "\n" + work.getmTime(), Toast.LENGTH_LONG).show();
-    }
-    public void updateArray(ArrayList<Work> works, String title,
-                            String category,String date, String time,
-                            Boolean isDone) {
-
-        //Add a new item add its date and update the array
-        works.add(new Work(title,category, date, time));
-        Toast.makeText(WorksActivity.this, "A new work is created! " +
-                "\n" + title +
-                "\n" + date +
-                "\n" + time +
-                "\n" + isDone.toString() +
-                "\n" + category, Toast.LENGTH_LONG).show();
+                "\n" + work.getmDay() +
+                "\n" + work.getmMonth() +
+                "\n" + work.getmYear() +
+                "\n" + work.getmHour() +
+                "\n" + work.getmMinute(), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -101,8 +86,8 @@ public class WorksActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_action:
-                Intent intent = new Intent(WorksActivity.this,AddWorkActivity.class);
-                Log.i("WorksActivity","Created intent");
+                Intent intent = new Intent(WorksActivity.this, AddWorkActivity.class);
+                Log.i("WorksActivity", "Created intent");
                 startActivity(intent);
                 Log.i("WorksActivity", "Started Activity");
             /*

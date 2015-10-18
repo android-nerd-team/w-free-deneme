@@ -1,42 +1,38 @@
 package com.example.recepinanc.whenfreedeneme;
 
-import java.util.UUID;
-
 /**
  * Created by recepinanc on 10/10/15.
  */
 public class Work {
 
-    private String mName;
-    private String mDate;
-    private String mTime;
+    private String mTitle;
+    private String mYear;
+    private String mMonth;
+    private String mDay;
+    private String mHour;
+    private String mMinute;
     private String mCategory;
 
     public Work() {
 
     }
 
-    public Work(String name, String category, String date, String time) {
-        this.mName = name;
+    public Work(String name, String category, String year, String month, String day, String hour, String minute) {
+        this.mTitle = name;
         this.mCategory = category;
-        this.mDate = date;
-        this.mTime = time;
+        this.mYear = year;
+        this.mMonth = month;
+        this.mDay = day;
+        this.mHour = hour;
+        this.mMinute = minute;
     }
 
-    public String getmName() {
-        return mName;
+    public String getmTitle() {
+        return mTitle;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
-    }
-
-    public String getmDate() {
-        return mDate;
-    }
-
-    public void setmDate(String mDate) {
-        this.mDate = mDate;
+    public void setmTitle(String mTitle) {
+        this.mTitle = mTitle;
     }
 
     public String getmCategory() {
@@ -47,11 +43,45 @@ public class Work {
         this.mCategory = mCategory;
     }
 
-    public String getmTime() {
-        return mTime;
+
+    public String getmYear() {
+        return mYear;
     }
 
-    public void setmTime(String mTime) {
-        this.mTime = mTime;
+    public void setmYear(String mYear) {
+        this.mYear = mYear;
     }
+
+    public String getmMonth() {
+        return mMonth;
+    }
+
+    public void setmMonth(String mMonth) {
+        this.mMonth = mMonth;
+    }
+
+    public String getmDay() {
+        return mDay;
+    }
+
+    public void setmDay(String mDay) {
+        this.mDay = mDay;
+    }
+
+    public String getmHour() {
+        return mHour;
+    }
+
+    public void setmHour(String mHour) {
+        this.mHour = mHour;
+    }
+
+    public String getmMinute() {
+        return mMinute;
+    }
+
+    public void setmMinute(String mMinute) {
+        this.mMinute = mMinute;
+    }
+
 }

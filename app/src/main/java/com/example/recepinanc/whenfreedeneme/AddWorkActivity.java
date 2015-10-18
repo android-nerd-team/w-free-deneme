@@ -1,11 +1,8 @@
 package com.example.recepinanc.whenfreedeneme;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.DialogFragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,26 +15,39 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.TimePicker;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  * Created by recepinanc on 11/10/15.
  */
-public class AddWorkActivity extends AppCompatActivity implements AlertDialogFragment.AlertDialogListener {
+public class AddWorkActivity extends AppCompatActivity {
 
     public static final String EXTRA_TITLE = "title";
     public static final String EXTRA_CATEGORY = "category";
-    public static final String EXTRA_DATE = "date";
-    public static final String EXTRA_TIME = "time";
+    public static final String EXTRA_YEAR = "year";
+    public static final String EXTRA_MONTH = "month";
+    public static final String EXTRA_DAY = "day";
+    public static final String EXTRA_HOUR = "hour";
+    public static final String EXTRA_MINUTE = "minute";
     public static final String EXTRA_IS_ADDED = "isAdded";
+
+    static final int DATE_DIALOG_ID = 999;
+    static final int TIME_DIALOG_ID = 111;
 
     private EditText title;
     private RadioGroup categoryRadioGroup;
-    private TextView dateSpinner; //use a calendar in an alertdialog
-    private TextView timeSpinner; //use a time picker in an alertdialog
+    private TextView datePicker;
+    private TextView timePicker;
+
+    private int year;
+    private int month;
+    private int day;
+
+    private int hour;
+    private int minute;
+    private boolean is24HourView = true;
 
 
     @Override
@@ -47,20 +57,81 @@ public class AddWorkActivity extends AppCompatActivity implements AlertDialogFra
 
         title = (EditText) findViewById(R.id.todoTitle_editText);
         categoryRadioGroup = (RadioGroup) findViewById(R.id.category_radioGroup);
-        dateSpinner = (TextView) findViewById(R.id.dateSpinner_textView);
-        timeSpinner = (TextView) findViewById(R.id.timeSpinner_textView);
+        datePicker = (TextView) findViewById(R.id.dateSpinner_textView);
+        timePicker = (TextView) findViewById(R.id.timeSpinner_textView);
 
-        dateSpinner.setOnClickListener(new View.OnClickListener() {
+        setDateOnView();
+
+        datePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showNoticeDialog();
-            /*
-                fm = getFragmentManager();
-                datePickerFragment = new DatePickerFragment();
-                FragmentTransaction fragmentTransaction = fm.beginTransaction().add(datePickerFragment, "Add");
-                fragmentTransaction.commit();*/
+                //todo call the create dialog method here.
+                showDialog(DATE_DIALOG_ID);
             }
         });
+
+        timePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //todo call create dialog for time picker.
+                showDialog(TIME_DIALOG_ID);
+            }
+        });
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DATE_DIALOG_ID:
+                //set date as the current date
+                return new DatePickerDialog(this, dateSetListener, year, month, day);
+            case TIME_DIALOG_ID:
+                //set time as the current time
+                return new TimePickerDialog(this, timeSetListener, hour, minute, is24HourView);
+        }
+        return null;
+    }
+
+    private DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
+
+            //assign selected values
+            year = selectedYear;
+            month = selectedMonth;
+            day = selectedDay;
+
+            //update the textView to selected date
+            setDateAsText(datePicker);
+        }
+
+    };
+
+    private TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
+
+            //assign the selected time
+            hour = selectedHour;
+            minute = selectedMinute;
+
+            setTimeAsText(timePicker);
+        }
+    };
+
+    private void setDateOnView() {
+
+        Calendar calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        hour = calendar.get(Calendar.HOUR_OF_DAY);
+        minute = calendar.get(Calendar.MINUTE);
+
+        setDateAsText(datePicker);
+        setTimeAsText(timePicker);
+
     }
 
 
@@ -90,16 +161,16 @@ public class AddWorkActivity extends AppCompatActivity implements AlertDialogFra
                         Log.e("WorksActivity", "Unexpected RadioButton ID");
                         break;
                 }
-                DateFormat dateFormat = DateFormat.getDateTimeInstance();
-                String date = dateFormat.format(new Date());
-                String time = ""; //TODO Change this to chosen time
-                //passdata via interface
+                //pass data via intent
                 Intent intent = new Intent(getBaseContext(), WorksActivity.class);
                 intent.putExtra(EXTRA_TITLE, title.getText().toString());
                 intent.putExtra(EXTRA_CATEGORY, category);
-                intent.putExtra(EXTRA_DATE, date);
-                intent.putExtra(EXTRA_TIME, time);
-                intent.putExtra(EXTRA_IS_ADDED,true);
+                intent.putExtra(EXTRA_HOUR, hour);
+                intent.putExtra(EXTRA_MINUTE, minute);
+                intent.putExtra(EXTRA_YEAR, year);
+                intent.putExtra(EXTRA_MONTH, month);
+                intent.putExtra(EXTRA_DAY, day);
+                intent.putExtra(EXTRA_IS_ADDED, true);
                 startActivity(intent);
                 break;
             default:
@@ -115,29 +186,50 @@ public class AddWorkActivity extends AppCompatActivity implements AlertDialogFra
         return true;
     }
 
-    public void showNoticeDialog() {
-        // Create an instance of the dialog fragment and show it
-        DialogFragment dialog = new AlertDialogFragment();
-        dialog.show(getFragmentManager(), "AlertDialogFragment");
+    public String monthConverter(int month) {
+        switch (month + 1) {
+            case 1:
+                return "JANUARY";
+            case 2:
+                return "FEBRUARY";
+            case 3:
+                return "MARCH";
+            case 4:
+                return "APRIL";
+            case 5:
+                return "MAYY";
+            case 6:
+                return "JUNE";
+            case 7:
+                return "JULY";
+            case 8:
+                return "AUGUST";
+            case 9:
+                return "SEPTEMBER";
+            case 10:
+                return "OCTOBER";
+            case 11:
+                return "NOVEMBER";
+            case 12:
+                return "DECEMBER";
+            default:
+                return "UNKNOWN";
+        }
     }
 
-    /*
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        dateSpinner.setText(dayOfMonth + " " + monthOfYear + " " + year);
-        Toast.makeText(AddWorkActivity.this, dayOfMonth + " " + monthOfYear + " " + year, Toast.LENGTH_SHORT).show();
+    public String minuteConverter(int minute) {
+        if (minute / 10 <= 0)
+            return "0" + minute;
+        else
+            return minute + "";
     }
 
-    @Override
-    public void datePasser(int year, int month, int day) {
-        dateSpinner.setText(day + " " + month + " " + year);
-        Toast.makeText(AddWorkActivity.this, day + " " + month + " " + year, Toast.LENGTH_SHORT).show();
+    public void setDateAsText(TextView datePicker) {
+        datePicker.setText(new StringBuilder().append(day).append(" ")
+                .append(monthConverter(month)).append(" ").append(year));
     }
-*/
 
-    @Override
-    public void noticePositiveClicked(AlertDialogFragment alertDialogFragment) {
-        Toast.makeText(AddWorkActivity.this, "On positive button clicked!We're in addworkactivity", Toast.LENGTH_SHORT).show();
+    public void setTimeAsText(TextView timePicker) {
+        timePicker.setText(new StringBuilder().append(hour).append(":").append(minuteConverter(minute)));
     }
 }
